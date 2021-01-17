@@ -13,8 +13,9 @@ public class EvenIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        for (int i = point; i<data.length; i++){
+        for (int i = point; i < data.length; i++){
             if (data[i] % 2 == 0) {
+                point = i;
                 return true;
             }
         }
@@ -26,12 +27,6 @@ public class EvenIterator implements Iterator<Integer> {
         if(!hasNext()){
             throw new NoSuchElementException();
         }
-        while (point < data.length) {
-            if (data[point] % 2 == 0) {
-                return data[point++];
-            }
-            point++;
-        }
-        return 0;
+        return data[point++];
     }
 }
