@@ -55,6 +55,6 @@ public class SimpleArrayTest {
         for (int i = 0; i < input.length; i++) {
             input[i] = numbers.iterator().next();
         }
-        assertThat(expected, is(input));
+        assertThat(input, is(expected));
     }
 }
