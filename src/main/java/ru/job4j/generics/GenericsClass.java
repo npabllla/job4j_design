@@ -12,9 +12,9 @@ public class GenericsClass<K, V> {
 
     @Override
     public String toString() {
-        return "GenericsClass{" +
-                "key=" + key +
-                ", value=" + value +
-                '}';
+        return "GenericsClass{"
+                + "key=" + key
+                + ", value=" + value
+                + '}';
     }
 }

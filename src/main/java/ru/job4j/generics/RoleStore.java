@@ -1,7 +1,7 @@
 package ru.job4j.generics;
 
 
-public class RoleStore implements Store<Role>{
+public class RoleStore implements Store<Role> {
     private final Store<Role> role = new MemStore<>();
 
     @Override
@@ -11,7 +11,7 @@ public class RoleStore implements Store<Role>{
 
     @Override
     public boolean replace(String id, Role model) {
-        return role.replace(id,model);
+        return role.replace(id, model);
     }
 
     @Override
