@@ -35,11 +35,9 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     }
 
     public E get(int index) {
-        Node<E> f = first;
-        Node<E> newNode = new Node<>(null, null, f);
-        first = newNode;
-        Node<E> temp = newNode.next;
-        for (int i = 0; i < Objects.checkIndex(index, size); i++) {
+        Node<E> temp = first;
+        int ind = Objects.checkIndex(index, size);
+        for (int i = 0; i < ind; i++) {
             temp = temp.next;
         }
         return temp.item;
@@ -48,12 +46,12 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
-            private final int point = 0;
             private final int expectedModCount = modCount;
+            Node<E> node = first;
 
             @Override
             public boolean hasNext() {
-                return point < size;
+                return node != null;
             }
 
             @Override
@@ -63,7 +61,9 @@ public class SimpleLinkedList<E> implements Iterable<E> {
                 } else if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return get(point);
+                E value = node.item;
+                node = node.next;
+                return value;
             }
         };
     }
