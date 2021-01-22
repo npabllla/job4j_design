@@ -1,20 +1,22 @@
 package ru.job4j.collection;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class SimpleSet<E> implements Iterable<E> {
     private final SimpleArray<E> array = new SimpleArray<>();
     private int size = 0;
 
-    public void add(E e) {
-        int repeats = 0;
-        for (int i = 0; i < size; i++) {
-            if (e.equals(array.get(i))) {
-                repeats++;
+    public boolean contains(E e) {
+            for (int i = 0; i < size; i++) {
+                if (Objects.equals(e, array.get(i))) {
+                    return true;
+                }
             }
-        }
-        if (repeats == 0) {
+        return false;
+    }
+
+    public void add(E e) {
+        if (!contains(e)) {
             array.add(e);
             size++;
         }
