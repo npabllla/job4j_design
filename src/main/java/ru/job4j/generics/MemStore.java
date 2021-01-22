@@ -2,9 +2,9 @@ package ru.job4j.generics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public final class MemStore<T extends Base> implements Store<T> {
-
     private final List<T> mem = new ArrayList<>();
 
     private int findIndexById(String id) {
@@ -33,7 +33,12 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean delete(String id) {
-        return mem.remove(findIndexById(id)) != null;
+        try {
+           int index = Objects.checkIndex(findIndexById(id), mem.size());
+           return mem.remove(index) != null;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     @Override
