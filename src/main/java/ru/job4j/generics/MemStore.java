@@ -33,12 +33,12 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean delete(String id) {
-        try {
-           int index = Objects.checkIndex(findIndexById(id), mem.size());
-           return mem.remove(index) != null;
-        } catch (IndexOutOfBoundsException e) {
-            return false;
+        int index = findIndexById(id);
+        if (index > -1) {
+            mem.remove(index);
+            return true;
         }
+        return false;
     }
 
     @Override
