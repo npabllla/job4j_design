@@ -8,7 +8,7 @@ public class SimpleArrayTest {
     @Test
     public void whenAdd() {
         SimpleArray<Integer> numbers = new SimpleArray<>(5);
-        Integer[] expected = new Integer[]{0,1,2,3,4};
+        Integer[] expected = new Integer[]{0, 1, 2, 3, 4};
         Integer[] input = new Integer[numbers.getLength()];
         for (int i = 0; i < numbers.getLength(); i++) {
             numbers.add(i);
@@ -20,14 +20,14 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenSet(){
+    public void whenSet() {
         SimpleArray<Integer> numbers = new SimpleArray<>(5);
-        Integer[] expected = new Integer[]{9,1,2,3,4};
+        Integer[] expected = new Integer[]{9, 1, 2, 3, 4};
         Integer[] input = new Integer[numbers.getLength()];
         for (int i = 0; i < numbers.getLength(); i++) {
             numbers.add(i);
         }
-        numbers.set(0,9);
+        numbers.set(0, 9);
         for (int i = 0; i < input.length; i++) {
             input[i] = numbers.iterator().next();
         }
@@ -40,13 +40,13 @@ public class SimpleArrayTest {
         for (int i = 0; i < numbers.getLength(); i++) {
             numbers.add(i);
         }
-        assertThat(numbers.get(3),is(3));
+        assertThat(numbers.get(3), is(3));
     }
 
     @Test
     public void whenRemove() {
         SimpleArray<Integer> numbers = new SimpleArray<>(5);
-        Integer[] expected = new Integer[]{1,2,3,4};
+        Integer[] expected = new Integer[]{1, 2, 3, 4};
         for (int i = 0; i < numbers.getLength(); i++) {
             numbers.add(i);
         }

@@ -27,7 +27,7 @@ public class ListUtilsTest {
     @Test
     public void whenAddAfter() {
         List<Integer> input = new ArrayList<>(List.of(1, 3, 4, 5, 6));
-        ListUtils.addAfter(input,3,2);
+        ListUtils.addAfter(input, 3, 2);
         assertThat(input, Is.is(List.of(1, 3, 4, 5, 2, 6)));
     }
 
@@ -38,24 +38,24 @@ public class ListUtilsTest {
     }
 
     @Test
-    public void whenRemoveIf(){
-        List<Integer> input = new ArrayList<>(List.of(0,1,2,3,4,5,6));
+    public void whenRemoveIf() {
+        List<Integer> input = new ArrayList<>(List.of(0, 1, 2, 3, 4, 5, 6));
         List<Integer> expected = ListUtils.removeIf(input, i -> i > 3);
         assertThat(input, Is.is(expected));
     }
 
     @Test
-    public void whenReplaceIf(){
-        List<Integer> input = new ArrayList<>(List.of(0,1,2,3,4,5,6));
-        List<Integer> expected = ListUtils.replaceIf(input,i -> i % 2 == 0, 0);
+    public void whenReplaceIf() {
+        List<Integer> input = new ArrayList<>(List.of(0, 1, 2, 3, 4, 5, 6));
+        List<Integer> expected = ListUtils.replaceIf(input, i -> i % 2 == 0, 0);
         assertThat(input, Is.is(expected));
     }
 
     @Test
-    public void whenReplaceAll(){
-        List<Integer> input = new ArrayList<>(List.of(0,1,0,3,0,5,0));
+    public void whenReplaceAll() {
+        List<Integer> input = new ArrayList<>(List.of(0, 1, 0, 3, 0, 5, 0));
         List<Integer> elements = new ArrayList<>(List.of(0));
-        List<Integer> expected = ListUtils.removeAll(input,elements);
+        List<Integer> expected = ListUtils.removeAll(input, elements);
         assertThat(input, Is.is(expected));
     }
 }

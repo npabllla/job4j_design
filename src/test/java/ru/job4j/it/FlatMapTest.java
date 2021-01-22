@@ -21,7 +21,7 @@ public class FlatMapTest {
     }
 
     @Test
-    public void whenMultiDiffNext(){
+    public void whenMultiDiffNext() {
         Iterator<Iterator<Integer>> data = List.of(
                 List.of(1, 2, 3).iterator(),
                 List.of(4, 5, 6).iterator(),

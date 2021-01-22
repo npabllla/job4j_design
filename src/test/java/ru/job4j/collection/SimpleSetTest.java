@@ -9,9 +9,9 @@ import static org.hamcrest.core.Is.is;
 
 public class SimpleSetTest {
     @Test
-    public void whenAdd(){
+    public void whenAdd() {
         SimpleSet<Integer> input = new SimpleSet<>();
-        List<Integer> expected = new ArrayList<>(List.of(1,2,3,4,5));
+        List<Integer> expected = new ArrayList<>(List.of(1, 2, 3, 4, 5));
         List<Integer> numbers = new ArrayList<>();
         input.add(1);
         input.add(2);
@@ -25,9 +25,9 @@ public class SimpleSetTest {
     }
 
     @Test
-    public void whenAddSame(){
+    public void whenAddSame() {
         SimpleSet<Integer> input = new SimpleSet<>();
-        List<Integer> expected = new ArrayList<>(List.of(1,2,3));
+        List<Integer> expected = new ArrayList<>(List.of(1, 2, 3));
         List<Integer> numbers = new ArrayList<>();
         input.add(1);
         input.add(2);
