@@ -22,24 +22,8 @@ public class SimpleSet<E> implements Iterable<E> {
         }
     }
 
-    Iterator<E> iterator = new Iterator<>() {
-        private int point = 0;
-        @Override
-        public boolean hasNext() {
-            return point < size;
-        }
-
-        @Override
-        public E next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            return array.get(point++);
-        }
-    };
-
     @Override
     public Iterator<E> iterator() {
-        return iterator;
+        return array.iterator();
     }
 }

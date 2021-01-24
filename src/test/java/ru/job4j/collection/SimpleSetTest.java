@@ -18,8 +18,8 @@ public class SimpleSetTest {
         input.add(3);
         input.add(4);
         input.add(5);
-        for (int i = 0; i < 5; i++) {
-            numbers.add(input.iterator().next());
+        for (Integer integer : input) {
+            numbers.add(integer);
         }
         assertThat(numbers, is(expected));
     }
@@ -34,8 +34,8 @@ public class SimpleSetTest {
         input.add(1);
         input.add(2);
         input.add(3);
-        for (int i = 0; i < 3; i++) {
-            numbers.add(input.iterator().next());
+        for (Integer integer : input) {
+            numbers.add(integer);
         }
         assertThat(numbers, is(expected));
     }
