@@ -40,7 +40,6 @@ public class TreeTest {
         tree.add(5, 6);
         assertThat(tree.add(1, 2), is(false));
     }
-<<<<<<< HEAD
 
     @Test
     public void whenBinary() {
@@ -62,6 +61,4 @@ public class TreeTest {
         tree.add(5, 6);
         assertThat(tree.isBinary(), is(false));
     }
-=======
->>>>>>> origin/master
 }

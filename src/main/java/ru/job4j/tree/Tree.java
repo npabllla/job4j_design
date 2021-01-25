@@ -9,7 +9,6 @@ class Tree<E> implements SimpleTree<E> {
         this.root = new Node<>(root);
     }
 
-<<<<<<< HEAD
     public boolean isBinary() {
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
@@ -21,8 +20,6 @@ class Tree<E> implements SimpleTree<E> {
         return true;
     }
 
-=======
->>>>>>> origin/master
     @Override
     public boolean add(E parent, E child) {
         Node<E> temp = findBy(parent).orElse(null);
