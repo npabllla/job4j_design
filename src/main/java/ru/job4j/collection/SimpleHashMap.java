@@ -5,17 +5,7 @@ import java.util.*;
 public class SimpleHashMap<K, V> implements Iterable<K> {
     private int length = 16;
     private int size = 0;
-    private Object[] keyContainer = new Object[length];
-    private Object[] valueContainer = new Object[length];
-
-    private boolean contains(K key) {
-        for (int i = 0; i < size; i++) {
-            if (keyContainer[i].equals(key)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    private Node<K, V>[] couples = new Node[length];
 
     public boolean insert(K key, V value) {
         if (contains(key)) {
@@ -23,11 +13,9 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         }
         if (size == length) {
             length *= 2;
-            keyContainer = Arrays.copyOf(keyContainer, length);
-            valueContainer = Arrays.copyOf(valueContainer, length);
+            couples = Arrays.copyOf(couples, length);
         }
-        keyContainer[size] = key;
-        valueContainer[size] = value;
+        couples[size] = new Node<>(key, value);
         size++;
         return true;
     }
@@ -35,22 +23,22 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     public V get(K key) {
         if (contains(key)) {
             for (int i = 0; i < size; i++) {
-                if (keyContainer[i].equals(key)) {
-                    return (V) valueContainer[i];
+                if (couples[i].key.equals(key)) {
+                    return couples[i].value;
                 }
             }
+            return null;
         } else {
             throw new NullPointerException();
         }
-        return null;
     }
 
     public boolean delete(K key) {
         if (contains(key)) {
             for (int i = 0; i < size; i++) {
-                if (keyContainer[i].equals(key)) {
-                    keyContainer[i] = null;
-                    valueContainer[i] = null;
+                if (couples[i].key.equals(key)) {
+                    couples[i].key = null;
+                    couples[i].value = null;
                     size--;
                     return true;
                 }
@@ -71,11 +59,29 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return (K) keyContainer[point++];
+            return couples[point++].key;
         }
     };
     @Override
     public Iterator<K> iterator() {
         return iterator;
+    }
+
+    private boolean contains(K key) {
+        for (int i = 0; i < size; i++) {
+            if (couples[i].key.equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static class Node<K, V> {
+        K key;
+        V value;
+        public Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 }
