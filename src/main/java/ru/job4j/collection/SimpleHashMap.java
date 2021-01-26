@@ -8,47 +8,41 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     private Node<K, V>[] couples = new Node[length];
 
     public boolean insert(K key, V value) {
-        if (contains(key)) {
+        int index = hash(key);
+        if (contains(index)) {
             return false;
         }
         if (size == length) {
             length *= 2;
             couples = Arrays.copyOf(couples, length);
         }
-        couples[size] = new Node<>(key, value);
+        couples[index] = new Node<>(key, value);
         size++;
         return true;
     }
 
     public V get(K key) {
-        if (contains(key)) {
-            for (int i = 0; i < size; i++) {
-                if (couples[i].key.equals(key)) {
-                    return couples[i].value;
-                }
-            }
-            return null;
-        } else {
-            throw new NullPointerException();
+        int index = hash(key);
+        if (contains(index)) {
+            return couples[index].value;
         }
+        return null;
     }
 
     public boolean delete(K key) {
-        if (contains(key)) {
-            for (int i = 0; i < size; i++) {
-                if (couples[i].key.equals(key)) {
-                    couples[i].key = null;
-                    couples[i].value = null;
-                    size--;
-                    return true;
-                }
-            }
+        int index = hash(key);
+        if (contains(index)) {
+           couples[index].key = null;
+           couples[index].value = null;
+           size--;
+           return true;
         }
         return false;
     }
 
     Iterator<K> iterator = new Iterator<>() {
         private int point = 0;
+        private int temp = 0;
         @Override
         public boolean hasNext() {
             return point < size;
@@ -59,7 +53,15 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return couples[point++].key;
+            for (int i = temp; i < length; i++) {
+                if (couples[i] != null) {
+                    temp = i;
+                    temp++;
+                    point++;
+                    return couples[i].key;
+                }
+            }
+            return null;
         }
     };
     @Override
@@ -67,13 +69,12 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         return iterator;
     }
 
-    private boolean contains(K key) {
-        for (int i = 0; i < size; i++) {
-            if (couples[i].key.equals(key)) {
-                return true;
-            }
-        }
-        return false;
+    private boolean contains(int index) {
+        return index <= length && couples[index] != null;
+    }
+
+    private int hash(K key) {
+        return (key.hashCode() % 100 + key.hashCode() % 10) % length;
     }
 
     private static class Node<K, V> {
