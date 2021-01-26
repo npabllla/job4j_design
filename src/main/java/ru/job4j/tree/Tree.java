@@ -22,14 +22,14 @@ class Tree<E> implements SimpleTree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        Node<E> temp = findBy(parent).orElse(null);
-         if (temp == null || temp.children.stream()
-                 .anyMatch(c -> c.value.equals(child))) {
+        Optional<Node<E>> temp = findBy(parent);
+         if (findBy(child).isPresent()) {
             return false;
-        } else {
-            temp.children.add(new Node<>(child));
+        } else if (temp.isPresent()) {
+            temp.get().children.add(new Node<>(child));
             return true;
         }
+         return false;
     }
 
     @Override

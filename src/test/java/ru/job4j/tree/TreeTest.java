@@ -38,7 +38,7 @@ public class TreeTest {
         tree.add(1, 4);
         tree.add(4, 5);
         tree.add(5, 6);
-        assertThat(tree.add(1, 2), is(false));
+        assertThat(tree.add(1, 5), is(false));
     }
 
     @Test
