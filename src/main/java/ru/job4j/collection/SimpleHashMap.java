@@ -5,6 +5,7 @@ import java.util.*;
 public class SimpleHashMap<K, V> implements Iterable<K> {
     private int length = 16;
     private int size = 0;
+    private int modCount = 0;
     private Node<K, V>[] couples = new Node[length];
 
     public boolean insert(K key, V value) {
@@ -12,12 +13,13 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         if (contains(index)) {
             return false;
         }
-        if (size == length) {
+        if (size == 0.75 * length) {
             length *= 2;
-            couples = Arrays.copyOf(couples, length);
+            couples = resize(length);
         }
         couples[index] = new Node<>(key, value);
         size++;
+        modCount++;
         return true;
     }
 
@@ -32,45 +34,60 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     public boolean delete(K key) {
         int index = hash(key);
         if (contains(index)) {
-           couples[index].key = null;
-           couples[index].value = null;
+           couples[index] = null;
            size--;
            return true;
         }
         return false;
     }
 
-    Iterator<K> iterator = new Iterator<>() {
-        private int point = 0;
-        private int temp = 0;
-        @Override
-        public boolean hasNext() {
-            return point < size;
-        }
-
-        @Override
-        public K next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            for (int i = temp; i < length; i++) {
-                if (couples[i] != null) {
-                    temp = i;
-                    temp++;
-                    point++;
-                    return couples[i].key;
-                }
-            }
-            return null;
-        }
-    };
     @Override
     public Iterator<K> iterator() {
-        return iterator;
+        return new Iterator<>() {
+            private int point = 0;
+            private int temp = 0;
+            private final int expectedModCount = modCount;
+            @Override
+            public boolean hasNext() {
+                return point < size;
+            }
+
+            @Override
+            public K next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                } else if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                for (int i = temp; i < length; i++) {
+                    if (couples[i] != null) {
+                        temp = i;
+                        temp++;
+                        point++;
+                        return couples[i].key;
+                    }
+                }
+                return null;
+            }
+        };
+    }
+
+    private Node<K, V>[] resize(int length) {
+        Node<K, V>[] oldTable = couples;
+        Node<K, V>[] newTable = new Node[length];
+        couples = newTable;
+        for (Node<K, V> kvNode : oldTable) {
+            Node<K, V> e;
+            if (kvNode != null) {
+                e = kvNode;
+                newTable[hash(e.key)] = e;
+            }
+        }
+        return newTable;
     }
 
     private boolean contains(int index) {
-        return index <= length && couples[index] != null;
+        return couples[index] != null;
     }
 
     private int hash(K key) {

@@ -22,9 +22,8 @@ public class SimpleHashMapTest {
         assertThat(map.insert("Three", 3), is(true));
         assertThat(map.insert("Two", 4), is(true));
         assertThat(map.insert("Two", 4), is(false));
-        final Iterator<String> iterator = map.iterator;
-        while (iterator.hasNext()) {
-            list.add(iterator.next());
+        for (String s : map) {
+            list.add(s);
         }
         assertThat(list, is(List.of("Three", "Four", "Two", "One")));
     }
