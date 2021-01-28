@@ -11,14 +11,11 @@ public class Analysis {
         }
         for (User user : current) {
             if (prevMap.get(user.id) == null) {
-                prevMap.remove(user.id);
                 info.added++;
             } else if (!prevMap.get(user.id).equals(user)) {
-                prevMap.remove(user.id);
                 info.changed++;
-            } else {
-                prevMap.remove(user.id);
             }
+            prevMap.remove(user.id);
         }
         info.deleted = prevMap.size();
         return info;
