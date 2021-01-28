@@ -3,6 +3,7 @@ package ru.job4j.collection;
 import java.util.*;
 
 public class SimpleHashMap<K, V> implements Iterable<K> {
+    static final float LOAD_FACTOR = 0.75f;
     private int length = 16;
     private int size = 0;
     private int modCount = 0;
@@ -13,7 +14,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         if (contains(index)) {
             return false;
         }
-        if (size == 0.75 * length) {
+        if (size >= LOAD_FACTOR * length) {
             length *= 2;
             couples = resize(length);
         }
@@ -25,7 +26,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     public V get(K key) {
         int index = hash(key);
-        if (contains(index)) {
+        if (contains(index) && couples[index].key.equals(couples[hash(key)].key)) {
             return couples[index].value;
         }
         return null;
@@ -33,7 +34,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     public boolean delete(K key) {
         int index = hash(key);
-        if (contains(index)) {
+        if (contains(index) && couples[index].key.equals(couples[hash(key)].key)) {
            couples[index] = null;
            size--;
            return true;
