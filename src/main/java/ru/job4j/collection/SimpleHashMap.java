@@ -26,7 +26,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     public V get(K key) {
         int index = hash(key);
-        if (contains(index) && couples[index].key.equals(couples[hash(key)].key)) {
+        if (contains(index) && couples[index].key.equals(key)) {
             return couples[index].value;
         }
         return null;
@@ -34,7 +34,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     public boolean delete(K key) {
         int index = hash(key);
-        if (contains(index) && couples[index].key.equals(couples[hash(key)].key)) {
+        if (contains(index) && couples[index].key.equals(key)) {
            couples[index] = null;
            size--;
            return true;
