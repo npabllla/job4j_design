@@ -5,45 +5,23 @@ import java.util.*;
 public class Analysis {
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info(0, 0, 0);
-        List<User> both = new ArrayList<>(previous);
-        both.addAll(current);
-        Map<User, Integer> map = new HashMap<>();
-        for (User user : both) {
-            if (map.containsKey(user)) {
-                map.put(user, map.get(user) + 1);
+        Map<Integer, User> prevMap = new HashMap<>();
+        for (User user : previous) {
+            prevMap.put(user.id, user);
+        }
+        for (User user : current) {
+            if (prevMap.get(user.id) == null) {
+                prevMap.remove(user.id);
+                info.added++;
+            } else if (!prevMap.get(user.id).equals(user)) {
+                prevMap.remove(user.id);
+                info.changed++;
             } else {
-                map.put(user, 1);
+                prevMap.remove(user.id);
             }
         }
-        Map<Integer, Integer> userMap = new HashMap<>();
-        for (User user : map.keySet()) {
-            if (map.get(user) < 2 && userMap.containsKey(user.id)) {
-                userMap.put(user.id, userMap.get(user.id) + 1);
-            } else if (map.get(user) < 2) {
-                userMap.put(user.id, 1);
-            }
-        }
-        info.changed = (int) userMap.entrySet().stream()
-                .filter(m -> m.getValue() >= 2)
-                .count();
-        info.added = find(userMap, current);
-        info.deleted = find(userMap, previous);
+        info.deleted = prevMap.size();
         return info;
-    }
-
-    private int find(Map<Integer, Integer> map, List<User> list) {
-        return (int) map.entrySet().stream()
-                .filter(m -> m.getValue() == 1 && list.contains(findById(list, m.getKey())))
-                .count();
-    }
-
-    private User findById(List<User> users, int id) {
-        for (User user : users) {
-            if (user.id == id) {
-                return user;
-            }
-        }
-        return null;
     }
 
     public static class User {
