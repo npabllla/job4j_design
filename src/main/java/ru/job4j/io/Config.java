@@ -19,7 +19,11 @@ public class Config {
             for (String st : list) {
                 if (!st.contains("#") && !st.equals("")) {
                     String[] temp = st.split("=");
-                    values.put(temp[0], temp[1]);
+                    if (temp.length < 2) {
+                        throw new IllegalArgumentException();
+                    } else {
+                        values.put(temp[0], temp[1]);
+                    }
                 }
             }
         } catch (Exception e) {

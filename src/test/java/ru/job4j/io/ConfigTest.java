@@ -59,4 +59,11 @@ public class ConfigTest {
                 is("password")
         );
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenPairWithoutValue() {
+        String path = "./data/pair_without_value.properties";
+        Config config = new Config(path);
+        config.load();
+    }
 }
