@@ -5,15 +5,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Analizy {
-    private List<String> result;
-
-    public List<String> getResult() {
-        return this.result;
-    }
-
     public void unavailable(String source, String target) {
         Map<String, Integer> logs = read(source);
-        result = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         String dropStart = null;
         for (String lg : logs.keySet()) {
             if ((logs.get(lg).equals(400) || logs.get(lg).equals(500)) && dropStart == null) {
