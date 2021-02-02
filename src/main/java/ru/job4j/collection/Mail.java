@@ -1,16 +1,16 @@
 package ru.job4j.collection;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.stream.Stream;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class Mail {
-
-    public static HashMap<String, String[]> merge(HashMap<String, String[]> mails) {
+    public static Map<String, Set<String>> merge(Map<String, Set<String>> mails) {
         if (mails.size() < 2) {
             return mails;
         }
-        HashMap<String, String[]> temp = new HashMap<>();
+        Map<String, Set<String>> temp = new HashMap<>();
         for (String key : mails.keySet()) {
             int f = 0;
             if (temp.size() == 0) {
@@ -18,10 +18,9 @@ public class Mail {
             } else {
                 for (String tempKey : temp.keySet()) {
                     if (containsAny(temp.get(tempKey), mails.get(key))) {
-                        temp.put(tempKey, Stream
-                                .concat(Arrays.stream(temp.get(tempKey)), Arrays.stream(mails.get(key)))
-                                .distinct()
-                                .toArray(String[]::new));
+                        Set<String> tmp = new HashSet<>(temp.get(tempKey));
+                        tmp.addAll(mails.get(key));
+                        temp.put(tempKey, tmp);
                         f++;
                     }
                 }
@@ -33,7 +32,7 @@ public class Mail {
         return temp;
     }
 
-    private static boolean containsAny(String[] arr1, String[] arr2) {
+    private static boolean containsAny(Set<String> arr1, Set<String> arr2) {
         for (String value : arr1) {
             for (String s : arr2) {
                 if (value.equals(s)) {

@@ -4,20 +4,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class MailTest {
     @Test
     public void whenMerge() {
-        HashMap<String, String[]> input = new HashMap<>();
-        String[] user1 = new String[]{"someMail1", "someMail3"};
-        String[] user2 = new String[]{"someMail3", "someMail4"};
-        String[] user3 = new String[]{"someMail5", "someMail6"};
+        Map<String, Set<String>> input = new HashMap<>();
+        Set<String> user1 = new HashSet<>();
+        Set<String> user2 = new HashSet<>();
+        Set<String> user3 = new HashSet<>();
         input.put("User1", user1);
         input.put("User2", user2);
         input.put("User3", user3);
-        HashMap<String, String[]> expected = new HashMap<>();
-        String[] user2Ex = new String[]{"someMail3", "someMail4", "someMail1"};
-        String[] user3Ex = new String[]{"someMail5", "someMail6"};
+        Map<String, Set<String>> expected = new HashMap<>();
+        Set<String> user2Ex = new HashSet<>();
+        Set<String> user3Ex = new HashSet<>();
         expected.put("User2", user2Ex);
         expected.put("User3", user3Ex);
         input = Mail.merge(input);
@@ -27,17 +30,17 @@ public class MailTest {
 
     @Test
     public void whenNotMerge() {
-        HashMap<String, String[]> input = new HashMap<>();
-        String[] user1 = new String[]{"someMail1", "someMail2"};
-        String[] user2 = new String[]{"someMail3", "someMail4"};
-        String[] user3 = new String[]{"someMail5", "someMail6"};
+        Map<String, Set<String>> input = new HashMap<>();
+        Set<String> user1 = new HashSet<>();
+        Set<String> user2 = new HashSet<>();
+        Set<String> user3 = new HashSet<>();
         input.put("User1", user1);
         input.put("User2", user2);
         input.put("User3", user3);
-        HashMap<String, String[]> expected = new HashMap<>();
-        String[] user1Ex = new String[]{"someMail1", "someMail2"};
-        String[] user2Ex = new String[]{"someMail3", "someMail4"};
-        String[] user3Ex = new String[]{"someMail5", "someMail6"};
+        Map<String, Set<String>> expected = new HashMap<>();
+        Set<String> user1Ex = new HashSet<>();
+        Set<String> user2Ex = new HashSet<>();
+        Set<String> user3Ex = new HashSet<>();
         expected.put("User1", user1Ex);
         expected.put("User2", user2Ex);
         expected.put("User3", user3Ex);
@@ -49,11 +52,11 @@ public class MailTest {
 
     @Test
     public void whenOnlyOneUser() {
-        HashMap<String, String[]> input = new HashMap<>();
-        String[] user1 = new String[]{"someMail1", "someMail2"};
+        Map<String, Set<String>> input = new HashMap<>();
+        Set<String> user1 = new HashSet<>();
         input.put("User1", user1);
-        HashMap<String, String[]> expected = new HashMap<>();
-        String[] user1Ex = new String[]{"someMail1", "someMail2"};
+        HashMap<String, Set<String>> expected = new HashMap<>();
+        Set<String> user1Ex = new HashSet<>();
         expected.put("User1", user1Ex);
         input = Mail.merge(input);
         assertThat(input.get("User1"), is(expected.get("User1")));
@@ -61,8 +64,8 @@ public class MailTest {
 
     @Test
     public void whenOnlyZeroUsers() {
-        HashMap<String, String[]> input = new HashMap<>();
-        HashMap<String, String[]> expected = new HashMap<>();
+        Map<String, Set<String>> input = new HashMap<>();
+        Map<String, Set<String>> expected = new HashMap<>();
         input = Mail.merge(input);
         assertThat(input, is(expected));
     }
