@@ -6,24 +6,9 @@ import java.util.stream.Collectors;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        Map<String, Integer> logs = read(source);
+        Map<String, Integer> logs = new LinkedHashMap<>();
         List<String> result = new ArrayList<>();
         String dropStart = null;
-        for (String lg : logs.keySet()) {
-            if ((logs.get(lg).equals(400) || logs.get(lg).equals(500)) && dropStart == null) {
-                dropStart = lg;
-            }
-            if (!logs.get(lg).equals(400) && !logs.get(lg).equals(500) && dropStart != null) {
-                StringBuilder sb = new StringBuilder();
-                result.add(sb.append(dropStart).append(";").append(lg).toString());
-                dropStart = null;
-            }
-        }
-        write(result, target);
-    }
-
-    private static Map<String, Integer> read(String source) {
-        Map<String, Integer> logs = new LinkedHashMap<>();
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
             List<String> list = read.lines().collect(Collectors.toList());
             for (String st : list) {
@@ -34,10 +19,20 @@ public class Analizy {
                     logs.put(tmp[1], Integer.parseInt(tmp[0]));
                 }
             }
+            for (String lg : logs.keySet()) {
+                if ((logs.get(lg).equals(400) || logs.get(lg).equals(500)) && dropStart == null) {
+                    dropStart = lg;
+                }
+                if (!logs.get(lg).equals(400) && !logs.get(lg).equals(500) && dropStart != null) {
+                    StringBuilder sb = new StringBuilder();
+                    result.add(sb.append(dropStart).append(";").append(lg).toString());
+                    dropStart = null;
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return logs;
+        write(result, target);
     }
 
     private static void write(List<String> result, String target) {
