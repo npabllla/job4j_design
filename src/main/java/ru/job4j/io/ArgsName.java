@@ -11,19 +11,15 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        List<String[]> list = new ArrayList<>();
-        for (String ar : args) {
-            list.add(ar.split("="));
-        }
-        if (list.size() < 2) {
+        if (args.length < 1) {
             throw new IllegalArgumentException();
-        } else {
-            for (String[] l : list) {
-                if (l.length < 2) {
-                    throw new IllegalArgumentException();
-                } else {
-                    values.put(l[0].substring(1), l[1]);
-                }
+        }
+        for (String ar : args) {
+            String[] temp = ar.split("=");
+            if (temp.length < 2) {
+                throw new IllegalArgumentException();
+            } else {
+                values.put(temp[0].substring(1), temp[1]);
             }
         }
     }
