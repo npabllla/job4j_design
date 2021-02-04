@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<car capacity="5" brand="someBrand" presence="true">
+    <engine power="152"/>
+    <colors>
+        <color>Blue</color>
+        <color>White</color>
+        <color>Black</color>
+    </colors>
+</car>
