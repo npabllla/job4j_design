@@ -1,10 +1,53 @@
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:18 +0300] "GET /items/ajax.html HTTP/1.1" 404 1113
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /TrackStudio HTTP/1.1" 302 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /TrackStudio/ HTTP/1.1" 404 1110
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:34 +0300] "GET /TrackStudioNew/ HTTP/1.1" 404 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:48 +0300] "GET / HTTP/1.1" 200 11488
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.png HTTP/1.1" 200 5103
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.css HTTP/1.1" 200 5931
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-nav.png HTTP/1.1" 200 1401
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-button.png HTTP/1.1" 200 713
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-middle.png HTTP/1.1" 200 1918
+d:\projects\job4j_design\.idea\checkstyle-idea.xml
+d:\projects\job4j_design\.idea\compiler.xml
+d:\projects\job4j_design\.idea\encodings.xml
+d:\projects\job4j_design\.idea\jarRepositories.xml
+d:\projects\job4j_design\.idea\libraries\Maven__com_google_code_gson_gson_2_8_6.xml
+d:\projects\job4j_design\.idea\libraries\Maven__com_sun_istack_istack_commons_runtime_3_0_7.xml
+d:\projects\job4j_design\.idea\libraries\Maven__com_sun_xml_fastinfoset_FastInfoset_1_2_15.xml
+d:\projects\job4j_design\.idea\libraries\Maven__javax_activation_activation_1_1_1.xml
+d:\projects\job4j_design\.idea\libraries\Maven__javax_activation_javax_activation_api_1_2_0.xml
+d:\projects\job4j_design\.idea\libraries\Maven__javax_xml_bind_jaxb_api_2_3_1.xml
+d:\projects\job4j_design\.idea\libraries\Maven__junit_junit_4_12.xml
+d:\projects\job4j_design\.idea\libraries\Maven__log4j_log4j_1_2_17.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_glassfish_jaxb_jaxb_runtime_2_3_1.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_glassfish_jaxb_txw2_2_3_1.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_hamcrest_hamcrest_all_1_3.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_hamcrest_hamcrest_core_1_3.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_json_json_20200518.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_jvnet_staxex_stax_ex_1_8.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_slf4j_slf4j_api_1_7_30.xml
+d:\projects\job4j_design\.idea\libraries\Maven__org_slf4j_slf4j_log4j12_1_7_30.xml
+d:\projects\job4j_design\.idea\misc.xml
+d:\projects\job4j_design\.idea\modules.xml
+d:\projects\job4j_design\.idea\vcs.xml
+d:\projects\job4j_design\.idea\workspace.xml
+d:\projects\job4j_design\checkstyle.xml
+d:\projects\job4j_design\pom.xml
+d:\projects\job4j_design\src\main\java\ru\job4j\serialization\xml\car.xml
+d:\projects\job4j_design\src\main\java\ru\job4j\serialization\xml\person.xml
+d:\projects\job4j_design\target\checkstyle-checker.xml
+d:\projects\job4j_design\target\checkstyle-result.xml
+d:\projects\job4j_design\target\site\jacoco\jacoco.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.AnalysisTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.ForwardLinkedTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.MailTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.SimpleArrayTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.SimpleHashMapTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.SimpleLinkedListTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.SimpleQueueTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.SimpleSetTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.collection.SimpleStackTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.generics.SimpleArrayTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.io.AbuseTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.io.AnalizyTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.io.ArgsNameTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.io.ConfigTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.it.ArrayItTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.it.BackwardArrayItTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.it.EvenIteratorTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.it.FlatMapTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.it.ListUtilsTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.it.MatrixItTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.tree.TreeTest.xml
+d:\projects\job4j_design\target\surefire-reports\TEST-ru.job4j.TriggerTest.xml
