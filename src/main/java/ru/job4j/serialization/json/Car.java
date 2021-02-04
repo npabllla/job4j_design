@@ -1,9 +1,10 @@
 package ru.job4j.serialization.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Car {
     private final int capacity;
@@ -11,6 +12,18 @@ public class Car {
     private final boolean presence;
     private final Engine engine;
     private final String[] colors;
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public boolean isPresence() {
+        return presence;
+    }
 
     public Car(int capacity, String brand, boolean presence, Engine engine, String[] colors) {
         this.capacity = capacity;
@@ -34,21 +47,19 @@ public class Car {
 
     public static void main(String[] args) {
         final  Car car = new Car(5, "someBrand1", true, new Engine(147.8), new String[]{"Black", "White", "Red"});
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(car));
-        final String carJson =
-                "{"
-                        + "\"capacity\": 7,"
-                        + "\"brand\":someBrand2,"
-                        + "\"presence\":true,"
-                        + "\"engine\":"
-                        + "{"
-                        + "\"power\": 172"
-                        + "},"
-                        + "\"colors\":"
-                        + "[\"Blue\",\"Yellow\"]"
-                        + "}";
-        final Car carMod = gson.fromJson(carJson, Car.class);
-        System.out.println(carMod);
+        JSONObject jsonEngine = new JSONObject("{\"power\":\"147.8\"}");
+        List<String> colors = new ArrayList<>();
+        colors.add("Black");
+        colors.add("White");
+        colors.add("Red");
+        JSONArray jsonColors = new JSONArray(colors);
+        JSONObject jsonCar = new JSONObject();
+        jsonCar.put("capacity", car.getCapacity());
+        jsonCar.put("brand", car.getBrand());
+        jsonCar.put("presence", car.isPresence());
+        jsonCar.put("engine", jsonEngine);
+        jsonCar.put("colors", jsonColors);
+        System.out.println(jsonCar.toString());
+        System.out.println(new JSONObject((car)).toString());
     }
 }
