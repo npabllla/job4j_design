@@ -34,12 +34,8 @@ public class Find {
     public static void main(String[] args) throws IOException {
         ArgFind argFind = new ArgFind(args);
         if (argFind.valid()) {
-            Path directory = Paths.get(argFind.directory());
-            String name = argFind.name();
-            String type = argFind.type();
-            File output = new File(argFind.output());
-            List<Path> sources = search(directory, name, type);
-            new Find().writer(sources, output);
+            List<Path> sources = search(Paths.get(argFind.directory()), argFind.name(), argFind.type());
+            new Find().writer(sources, new File(argFind.output()));
         } else {
             throw new IllegalArgumentException();
         }
