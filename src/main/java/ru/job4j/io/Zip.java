@@ -1,8 +1,10 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -33,11 +35,21 @@ public class Zip {
         }
     }
 
+    private static List<Path> getSources(Path path, String exclude) throws IOException {
+        SearchFiles searcher = new SearchFiles(p -> !p.toFile().getName().endsWith(exclude));
+        Files.walkFileTree(path, searcher);
+        return searcher.getPaths();
+    }
+
     public static void main(String[] args) throws IOException {
         ArgZip argZip = new ArgZip(args);
-        Path directory = Paths.get(argZip.directory());
-        File output = new File(argZip.output());
-        List<Path> sources = Search.search(directory, argZip.exclude());
-        new Zip().packFiles(sources, output);
+        if (argZip.valid()) {
+            Path directory = Paths.get(argZip.directory());
+            File output = new File(argZip.output());
+            List<Path> source = new ArrayList<>(getSources(directory, argZip.exclude()));
+            new Zip().packFiles(source, output);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }
