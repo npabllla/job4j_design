@@ -34,11 +34,10 @@ public class Find {
 
     public static void main(String[] args) throws IOException {
         ArgFind argFind = new ArgFind(args);
-        if (argFind.valid()) {
-            List<Path> sources = search(Paths.get(argFind.directory()), argFind.name(), argFind.type());
-            new Find().writer(sources, new File(argFind.output()));
-        } else {
+        if (!argFind.valid()) {
             throw new IllegalArgumentException();
         }
+        List<Path> sources = search(Paths.get(argFind.directory()), argFind.name(), argFind.type());
+        new Find().writer(sources, new File(argFind.output()));
     }
 }
