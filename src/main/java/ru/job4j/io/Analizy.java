@@ -10,7 +10,8 @@ public class Analizy {
         List<String> result = new ArrayList<>();
         String dropStart = null;
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
-            for (String st : read.lines().collect(Collectors.toList())) {
+            List<String> list = read.lines().collect(Collectors.toList());
+            for (String st : list) {
                 String[] tmp = st.split(" ");
                 if (tmp.length < 2) {
                     throw new IllegalArgumentException();
@@ -38,7 +39,7 @@ public class Analizy {
         try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
             for (String rsl : result) {
                 out.write(rsl);
-                out.write("\n");
+                out.write(System.lineSeparator());
             }
         } catch (Exception e) {
             e.printStackTrace();
