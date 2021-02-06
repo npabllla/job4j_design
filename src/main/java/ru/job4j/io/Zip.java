@@ -43,13 +43,12 @@ public class Zip {
 
     public static void main(String[] args) throws IOException {
         ArgZip argZip = new ArgZip(args);
-        if (argZip.valid()) {
-            Path directory = Paths.get(argZip.directory());
-            File output = new File(argZip.output());
-            List<Path> source = new ArrayList<>(getSources(directory, argZip.exclude()));
-            new Zip().packFiles(source, output);
-        } else {
+        if (!argZip.valid()) {
             throw new IllegalArgumentException();
         }
+        Path directory = Paths.get(argZip.directory());
+        File output = new File(argZip.output());
+        List<Path> source = new ArrayList<>(getSources(directory, argZip.exclude()));
+        new Zip().packFiles(source, output);
     }
 }
