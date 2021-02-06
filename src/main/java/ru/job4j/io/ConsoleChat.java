@@ -27,24 +27,24 @@ public class ConsoleChat {
         String userPhrase = in.nextLine();
         String botAnswer = botAns.get(index.nextInt(botAns.size()));
         System.out.println(botAnswer);
-        log.add("User: " + userPhrase + System.lineSeparator());
-        log.add("Bot: " + botAnswer + System.lineSeparator());
+        log.add(String.format("User: ", userPhrase, System.lineSeparator()));
+        log.add(String.format("Bot: ", botAnswer, System.lineSeparator()));
         while (!userPhrase.equals(OUT)) {
             botAnswer = botAns.get(index.nextInt(botAns.size()));
             userPhrase = in.nextLine();
             if (userPhrase.equals(STOP)) {
-                log.add("User: " + userPhrase + System.lineSeparator());
+                log.add(String.format("User: ", userPhrase, System.lineSeparator()));
                 while (!userPhrase.equals(CONTINUE)) {
                     userPhrase = in.nextLine();
                     if (!userPhrase.equals(CONTINUE)) {
-                        log.add("User: " + userPhrase + System.lineSeparator());
+                        log.add(String.format("User: ", userPhrase, System.lineSeparator()));
                     }
                 }
             }
-            log.add("User: " + userPhrase + System.lineSeparator());
+            log.add(String.format("User: ", userPhrase, System.lineSeparator()));
             if (!userPhrase.equals(OUT)) {
                 System.out.println(botAnswer);
-                log.add("Bot: " + botAnswer + System.lineSeparator());
+                log.add(String.format("Bot: ", botAnswer, System.lineSeparator()));
             }
         }
         writeLog(log, this.path);
