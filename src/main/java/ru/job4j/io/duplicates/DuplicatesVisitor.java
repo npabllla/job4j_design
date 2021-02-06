@@ -8,20 +8,13 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
-    private List<FileProperty> temp = new ArrayList<>();
+    private Set<FileProperty> files = new HashSet<>();
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        temp.add(new FileProperty(file.toFile().getTotalSpace(), file.toFile().getName()));
-        List<FileProperty> result = new ArrayList<>();
-        Set<FileProperty> tmp = new HashSet<>();
-        for (FileProperty fp : temp) {
-            if (tmp.contains(fp)) {
-                result.add(fp);
-            } else {
-                tmp.add(fp);
-            }
+        FileProperty tmp = new FileProperty(file.toFile().getTotalSpace(), file.toFile().getName());
+        if (!files.add(tmp)) {
+            System.out.println(tmp);
         }
-        System.out.println(result);
         return super.visitFile(file, attrs);
     }
 }
