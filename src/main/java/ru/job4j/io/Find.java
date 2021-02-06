@@ -8,9 +8,10 @@ import java.util.List;
 
 public class Find {
     public void writer(List<Path> sources, File target) {
-        try (BufferedWriter wr = new BufferedWriter(new FileWriter(target))) {
+        try (PrintWriter wr = new PrintWriter(new FileWriter(target))) {
             for (Path src : sources) {
-                wr.write(src.toString() + System.lineSeparator());
+                wr.write(src.toString());
+                wr.write(System.lineSeparator());
             }
         } catch (Exception e) {
             e.printStackTrace();
