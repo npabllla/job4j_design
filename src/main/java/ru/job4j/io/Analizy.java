@@ -6,19 +6,14 @@ import java.util.stream.Collectors;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        Map<String, Integer> logs = new LinkedHashMap<>();
+        Map<String, Integer> logs;
         List<String> result = new ArrayList<>();
         String dropStart = null;
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
-            List<String> list = read.lines().collect(Collectors.toList());
-            for (String st : list) {
-                String[] tmp = st.split(" ");
-                if (tmp.length < 2) {
-                    throw new IllegalArgumentException();
-                } else {
-                    logs.put(tmp[1], Integer.parseInt(tmp[0]));
-                }
-            }
+            logs = read.lines()
+                    .map(e -> e.split(" "))
+                    .filter(e -> e.length == 2)
+                    .collect(Collectors.toMap(e -> e[1], e -> Integer.parseInt(e[0]), (e1, e2) -> e1, LinkedHashMap::new));
             for (String lg : logs.keySet()) {
                 if ((logs.get(lg).equals(400) || logs.get(lg).equals(500)) && dropStart == null) {
                     dropStart = lg;
