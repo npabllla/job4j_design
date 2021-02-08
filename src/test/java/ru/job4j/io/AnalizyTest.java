@@ -14,7 +14,7 @@ public class AnalizyTest {
     public TemporaryFolder folder = new TemporaryFolder();
 
     @Test
-    public void whenTwoPeriod() throws IOException {
+    public void whenTwoPeriod() throws IOException, IllegalArgumentException {
         Analizy analizy = new Analizy();
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
@@ -35,7 +35,7 @@ public class AnalizyTest {
     }
 
     @Test
-    public void whenOnePeriod() throws IOException {
+    public void whenOnePeriod() throws IOException, IllegalArgumentException {
         Analizy analizy = new Analizy();
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
@@ -53,5 +53,21 @@ public class AnalizyTest {
             in.lines().forEach(rsl::append);
         }
         assertThat(rsl.toString(), is("10:57:01;11:02:02"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenWrongLogInfo() throws IOException, IllegalArgumentException {
+        Analizy analizy = new Analizy();
+        File source = folder.newFile("source.txt");
+        File target = folder.newFile("target.txt");
+        try (PrintWriter out = new PrintWriter(source)) {
+            out.println("200 ");
+            out.println("500 10:57:01");
+            out.println("400 10:58:01");
+            out.println("500 10:59:01");
+            out.println("500 11:01:02");
+            out.println("200 11:02:02");
+        }
+        analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
     }
 }

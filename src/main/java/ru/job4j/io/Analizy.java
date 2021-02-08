@@ -5,22 +5,25 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Analizy {
-    public void unavailable(String source, String target) {
-        Map<String, Integer> logs;
-        List<String> result = new ArrayList<>();
+    private String[] lines;
+    private String line;
+    private List<String> result = new ArrayList<>();
+
+    public void unavailable(String source, String target) throws IllegalArgumentException {
         String dropStart = null;
         try (BufferedReader read = new BufferedReader(new FileReader(source))) {
-            logs = read.lines()
-                    .map(e -> e.split(" "))
-                    .filter(e -> e.length == 2)
-                    .collect(Collectors.toMap(e -> e[1], e -> Integer.parseInt(e[0]), (e1, e2) -> e1, LinkedHashMap::new));
-            for (String lg : logs.keySet()) {
-                if ((logs.get(lg).equals(400) || logs.get(lg).equals(500)) && dropStart == null) {
-                    dropStart = lg;
+            while ((line = read.readLine()) != null) {
+                lines = line.split(" ");
+                if (lines.length < 2) {
+                    throw new IllegalArgumentException();
+                } else if ((Integer.parseInt(lines[0]) == 400 || Integer.parseInt(lines[0]) == 500)
+                        && dropStart == null) {
+                    dropStart = lines[1];
                 }
-                if (!logs.get(lg).equals(400) && !logs.get(lg).equals(500) && dropStart != null) {
+                if (!(Integer.parseInt(lines[0]) == 400) && !(Integer.parseInt(lines[0]) == 500)
+                        && dropStart != null) {
                     StringBuilder sb = new StringBuilder();
-                    result.add(sb.append(dropStart).append(";").append(lg).toString());
+                    result.add(sb.append(dropStart).append(";").append(lines[1]).toString());
                     dropStart = null;
                 }
             }
