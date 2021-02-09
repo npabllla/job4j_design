@@ -1,0 +1,10 @@
+create database university;
+create table student(
+    id serial primary key,
+    name varchar(255),
+    age int,
+    gender char
+);
+insert into student(name, age, gender) values ('Bob', 22, 'M');
+update student set name = 'Jhon';
+delete from student;
