@@ -36,7 +36,7 @@ select p.name from products as p join type as t on p.type_id = t.id where t.name
 -- 2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженное"
 select * from products where name LIKE '%мороженное%';
 -- 3. Написать запрос, который выводит все продукты, срок годности которых заканчивается в следующем месяце.
-select name from products where EXTRACT(MONTH FROM expired_date) = EXTRACT(MONTH FROM now())+1;
+select name from products where EXTRACT(MONTH FROM expired_date) = EXTRACT(MONTH FROM now() + interval '1 month');
 -- 4. Написать запрос, который выводит самый дорогой продукт.
 select * from products where price = (select max(price) from products);
 -- 5. Написать запрос, который выводит количество всех продуктов определенного типа.
