@@ -10,3 +10,4 @@
 * [Serialization](https://github.com/npabllla/job4j_design/tree/master/src/main/java/ru/job4j/serialization)
 * [SQL](https://github.com/npabllla/job4j_design/tree/master/src/main/java/ru/job4j/sql)
 * [JDBC](https://github.com/npabllla/job4j_design/tree/master/src/main/java/ru/job4j/jdbc)
+* [Garbage Collection](https://github.com/npabllla/job4j_design/tree/master/src/main/java/ru/job4j/gc)

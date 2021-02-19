@@ -37,8 +37,8 @@ public class MemoryUtil {
 
     static {
         // Запоминаем информацию обо всех регионах памяти
-        memRegions = new HashMap<String, MemRegion>(ManagementFactory.getMemoryPoolMXBeans().size());
-        for(MemoryPoolMXBean mBean: ManagementFactory.getMemoryPoolMXBeans()) {
+        memRegions = new HashMap<>(ManagementFactory.getMemoryPoolMXBeans().size());
+        for (MemoryPoolMXBean mBean: ManagementFactory.getMemoryPoolMXBeans()) {
             memRegions.put(mBean.getName(), new MemRegion(mBean.getName(), mBean.getType() == MemoryType.HEAP));
         }
     }
@@ -67,7 +67,7 @@ public class MemoryUtil {
      * Выводит в stdout информацию о текущем состоянии различных разделов памяти.
      */
     public static void printUsage(boolean heapOnly) {
-        for(MemoryPoolMXBean mBean: ManagementFactory.getMemoryPoolMXBeans()) {
+        for (MemoryPoolMXBean mBean: ManagementFactory.getMemoryPoolMXBeans()) {
             if (!heapOnly || mBean.getType() == MemoryType.HEAP) {
                 printMemUsage(mBean.getName(), mBean.getUsage());
             }
@@ -78,7 +78,7 @@ public class MemoryUtil {
      * Запускает процесс мониторинга сборок мусора.
      */
     public static void startGCMonitor() {
-        for(GarbageCollectorMXBean mBean: ManagementFactory.getGarbageCollectorMXBeans()) {
+        for (GarbageCollectorMXBean mBean: ManagementFactory.getGarbageCollectorMXBeans()) {
             ((NotificationEmitter) mBean).addNotificationListener(gcHandler, null, null);
         }
     }
@@ -87,10 +87,11 @@ public class MemoryUtil {
      * Останавливает процесс мониторинга сборок мусора.
      */
     public static void stopGCMonitor() {
-        for(GarbageCollectorMXBean mBean: ManagementFactory.getGarbageCollectorMXBeans()) {
+        for (GarbageCollectorMXBean mBean: ManagementFactory.getGarbageCollectorMXBeans()) {
             try {
                 ((NotificationEmitter) mBean).removeNotificationListener(gcHandler);
-            } catch(ListenerNotFoundException e) {
+            } catch (ListenerNotFoundException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -99,23 +100,23 @@ public class MemoryUtil {
         System.out.println(String.format("%s%s\t%.1f%%\t[%s]",
                 memRegions.get(title).getNormName(),
                 formatMemory(usage.getUsed()),
-                usage.getMax() < 0 ? 0.0 : (double)usage.getUsed() / (double)usage.getMax() * 100,
+                usage.getMax() < 0 ? 0.0 : (double) usage.getUsed() / (double) usage.getMax() * 100,
                 formatMemory(usage.getMax())));
     }
 
     private static String formatMemory(long bytes) {
         if (bytes > SIZE_GB) {
-            return String.format("%.2fG", bytes / (double)SIZE_GB);
+            return String.format("%.2fG", bytes / (double) SIZE_GB);
         } else if (bytes > SIZE_MB) {
-            return String.format("%.2fM", bytes / (double)SIZE_MB);
+            return String.format("%.2fM", bytes / (double) SIZE_MB);
         } else if (bytes > SIZE_KB) {
-            return String.format("%.2fK", bytes / (double)SIZE_KB);
+            return String.format("%.2fK", bytes / (double) SIZE_KB);
         }
         return Long.toString(bytes);
     }
 
     private static void appendMemUsage(StringBuilder sb, Map<String, MemoryUsage> memUsage) {
-        for(Map.Entry<String, MemoryUsage> entry: memUsage.entrySet()) {
+        for (Map.Entry<String, MemoryUsage> entry: memUsage.entrySet()) {
             if (memRegions.get(entry.getKey()).isHeap()) {
                 sb.append(entry.getKey()).append(" used=")
                         .append(entry.getValue().getUsed() >> 10)
