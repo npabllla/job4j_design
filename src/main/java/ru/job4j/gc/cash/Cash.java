@@ -13,16 +13,17 @@ public class Cash<K, V> {
     }
 
     public V get(K key) {
-        SoftReference<V> value = cash.get(key);
-        if (value == null) {
-            return null;
-        }
-        V data = value.get();
-        if (data == null) {
+        if (cash.containsKey(key)) {
+            SoftReference<V> value = cash.get(key);
+            if (value == null) {
+                add(key);
+                return get(key);
+            } else {
+                return value.get();
+            }
+        } else {
             add(key);
             return cash.get(key).get();
-        } else {
-            return data;
         }
     }
 
