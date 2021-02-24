@@ -14,12 +14,12 @@ public class Cash<K, V> {
 
     public V get(K key) {
         if (cash.containsKey(key)) {
-            SoftReference<V> value = cash.get(key);
-            if (value == null) {
+            V text = cash.get(key).get();
+            if (text == null) {
                 add(key);
-                return get(key);
+                return cash.get(key).get();
             } else {
-                return value.get();
+                return text;
             }
         } else {
             add(key);
