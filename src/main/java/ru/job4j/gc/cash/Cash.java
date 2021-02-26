@@ -9,9 +9,9 @@ public class Cash<K, V> {
     private Map<K, SoftReference<V>> cash = new HashMap<>();
 
     public V add(K key) {
-        SoftReference<V> softReference = new SoftReference<>(fileInfo(key));
-        cash.put(key, softReference);
-        return softReference.get();
+        V value = fileInfo(key);
+        cash.put(key, new SoftReference<>(value));
+        return value;
     }
 
     public V get(K key) {
