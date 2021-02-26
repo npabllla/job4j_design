@@ -8,22 +8,22 @@ import java.util.Map;
 public class Cash<K, V> {
     private Map<K, SoftReference<V>> cash = new HashMap<>();
 
-    public void add(K key) {
-        cash.put(key, new SoftReference<>(fileInfo(key)));
+    public V add(K key) {
+        SoftReference<V> softReference = new SoftReference<>(fileInfo(key));
+        cash.put(key, softReference);
+        return softReference.get();
     }
 
     public V get(K key) {
         if (cash.containsKey(key)) {
             V text = cash.get(key).get();
             if (text == null) {
-                add(key);
-                return cash.get(key).get();
+                return add(key);
             } else {
                 return text;
             }
         } else {
-            add(key);
-            return cash.get(key).get();
+            return add(key);
         }
     }
 
