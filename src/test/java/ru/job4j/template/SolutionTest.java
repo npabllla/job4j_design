@@ -15,13 +15,13 @@ public class SolutionTest {
         assertThat(solution.produce("I am a ${name}, Who are ${subject}?", Map.of("name", "Petr", "subject", "you")), is("I am a Petr, Who are you?"));
     }
 
-    @Test(expected = IOException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void whenNotEnoughKeys() {
         Solution solution = new Solution();
         solution.produce("I am a ${name}, Who are ${subject}? ${emotion}", Map.of("name", "Petr", "subject", "you"));
     }
 
-    @Test(expected = IOException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void whenToManyKeys() {
         Solution solution = new Solution();
         solution.produce("I am a ${name}, Who are ${subject}?", Map.of("name", "Petr", "subject", "you", "emotion", "Nice to meet u"));
