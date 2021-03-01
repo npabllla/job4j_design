@@ -13,20 +13,11 @@ public class ReportForHRTest {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
-        Employee worker1 = new Employee("Alexandr", now, now, 250);
-        Employee worker2 = new Employee("Daniil", now, now, 200);
         store.add(worker);
-        store.add(worker1);
-        store.add(worker2);
         Report engine = new ReportForHR(store);
         StringBuilder expect = new StringBuilder()
-                .append("Name; Salary;")
-                .append(worker1.getName()).append(";")
-                .append(worker1.getSalary()).append(";")
-                .append(worker2.getName()).append(";")
-                .append(worker2.getSalary()).append(";")
-                .append(worker.getName()).append(";")
-                .append(worker.getSalary()).append(";");
+                .append("{\"name\":").append("\"").append(worker.getName()).append("\",")
+                .append("\"salary\":").append((int) worker.getSalary()).append("}");
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 }
