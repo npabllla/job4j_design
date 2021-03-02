@@ -4,9 +4,11 @@ import java.util.function.Predicate;
 
 public class ReportForAccountant implements Report {
     private Store store;
+    private double dollarRate;
 
-    public ReportForAccountant(Store store) {
+    public ReportForAccountant(Store store, double dollarRate) {
         this.store = store;
+        this.dollarRate = dollarRate;
     }
 
     @Override
@@ -17,7 +19,7 @@ public class ReportForAccountant implements Report {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary()).append(" USD").append(";");
+                    .append(employee.getSalary() / dollarRate).append(" USD").append(";");
         }
         return text.toString();
     }

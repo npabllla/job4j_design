@@ -14,13 +14,13 @@ public class ReportForAccountantTest {
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        Report engine = new ReportForAccountant(store);
+        Report engine = new ReportForAccountant(store, 68.4);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(worker.getName()).append(";")
                 .append(worker.getHired()).append(";")
                 .append(worker.getFired()).append(";")
-                .append(worker.getSalary()).append(" USD").append(";");
+                .append(worker.getSalary() / 68.4).append(" USD").append(";");
         assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 }
