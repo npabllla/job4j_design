@@ -24,4 +24,6 @@ public abstract class Storage {
                 .filter(e -> e.getName().equals(name))
                 .collect(Collectors.toList());
     }
+
+    abstract boolean accept(Food food);
 }

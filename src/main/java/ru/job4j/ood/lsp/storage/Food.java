@@ -11,10 +11,6 @@ public class Food {
     private double price;
     private double discount;
 
-    public Food() {
-
-    }
-
     public Food(String name, LocalDate expiryDate, LocalDate createDate, double price, double discount) {
         this.name = name;
         this.expiryDate = expiryDate;
@@ -23,9 +19,9 @@ public class Food {
         this.discount = discount;
     }
 
-    public int percentageOfDate() {
-        return (expiryDate.getDayOfYear() - LocalDate.now().getDayOfYear())
-                / (expiryDate.getDayOfYear() - createDate.getDayOfYear());
+    public double percentageOfDate() {
+        return (((double) (expiryDate.getDayOfYear() - LocalDate.now().getDayOfYear())
+                / (double) (expiryDate.getDayOfYear() - createDate.getDayOfYear()))) * 100;
     }
     public String getName() {
         return name;
