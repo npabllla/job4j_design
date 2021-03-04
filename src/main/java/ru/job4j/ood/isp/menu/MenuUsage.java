@@ -18,7 +18,7 @@ public class MenuUsage {
         menu.add(task1);
         menu.add(task2);
         menu.print();
-        task1.getActions().forEach(Action::doSomething);
         System.out.println(task2.getChildren());
+        menu.choose("Task 1.").forEach(Action::doSomething);
     }
 }
