@@ -11,6 +11,10 @@ public abstract class Storage {
         return storage.add(food);
     }
 
+    public boolean deleteAll(List<Food> products) {
+        return storage.removeAll(products);
+    }
+
     boolean delete(Food food) {
         return storage.remove(food);
     }
