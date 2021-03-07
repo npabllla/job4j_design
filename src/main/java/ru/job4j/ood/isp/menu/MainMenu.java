@@ -24,13 +24,22 @@ public class MainMenu implements Menu {
     }
 
     public List<Action> choose(String elementName) {
-       Optional<Element> element = elements.stream()
-               .filter(e -> e.getName().equals(elementName))
-               .findFirst();
-       if (element.isPresent()) {
-           return element.get().getActions();
-       } else {
+        Element element = null;
+       for (Element element1 : elements) {
+           element = search(element1, elementName);
+       }
+       if (element == null) {
            throw new NoSuchElementException();
        }
+       return element.getActions();
+    }
+
+    private Element search(Element element, String elementName) {
+        if (element.getName().equals(elementName)) {
+            return element;
+        } else {
+            search(element, elementName);
+        }
+        return null;
     }
 }
