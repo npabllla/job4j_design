@@ -29,7 +29,7 @@ public class MainMenu implements Menu {
            element = search(element1, elementName);
        }
        if (element == null) {
-           throw new NoSuchElementException();
+           return null;
        }
        return element.getActions();
     }
