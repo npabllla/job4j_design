@@ -19,11 +19,13 @@
 
         <mapping class="ru.job4j.many.Role"/>
         <mapping class="ru.job4j.many.User"/>
-        <mapping class="ru.job4j.many.Car"/>
-        <mapping class="ru.job4j.many.Mark"/>
         <mapping class="ru.job4j.manytomany.Person"/>
         <mapping class="ru.job4j.manytomany.Address"/>
         <mapping class="ru.job4j.manytomany.Author"/>
         <mapping class="ru.job4j.manytomany.Book"/>
+        <mapping class="ru.job4j.lazy.Category"/>
+        <mapping class="ru.job4j.lazy.Task"/>
+        <mapping class="ru.job4j.lazy.Car"/>
+        <mapping class="ru.job4j.lazy.Mark"/>
     </session-factory>
 </hibernate-configuration>

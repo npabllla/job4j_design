@@ -1,4 +1,4 @@
-package ru.job4j.many;
+package ru.job4j.lazy;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class Mark {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "mark")
     private List<Car> cars = new ArrayList<>();
 
     public static Mark of(String name) {
@@ -71,5 +71,13 @@ public class Mark {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Mark{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 }

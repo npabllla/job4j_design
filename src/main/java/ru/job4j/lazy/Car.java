@@ -1,4 +1,4 @@
-package ru.job4j.many;
+package ru.job4j.lazy;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,9 +11,14 @@ public class Car {
     private int id;
     private String name;
 
-    public static Car of(String name) {
+    @ManyToOne
+    @JoinColumn(name = "mark_id")
+    private Mark mark;
+
+    public static Car of(String name, Mark mark) {
         Car car = new Car();
         car.name = name;
+        car.mark = mark;
         return car;
     }
 
@@ -53,4 +58,14 @@ public class Car {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Car{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", mark=" + mark
+                + '}';
+    }
 }
+
