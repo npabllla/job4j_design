@@ -9,7 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HbmRun {
+public class HbmRunFirst {
     public static void main(String[] args) {
         List<Mark> list = new ArrayList<>();
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
