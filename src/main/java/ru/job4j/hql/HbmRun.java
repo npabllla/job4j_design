@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 public class HbmRun {
     public static void main(String[] args) {
+        Candidate rsl = null;
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure().build();
         try {
@@ -17,28 +18,12 @@ public class HbmRun {
             Session session = sf.openSession();
             session.beginTransaction();
 
-//            Candidate one = Candidate.of("Alex", 2, 1500);
-//            Candidate two = Candidate.of("Nikolay", 1, 750);
-//            Candidate three = Candidate.of("Nikita", 15, 3500);
-//
-//            session.save(one);
-//            session.save(two);
-//            session.save(three);
-
-            System.out.println(session.createQuery("from Candidate").list());
-
-            Query querySelectByName = session.createQuery("from Candidate where name =: name");
-            querySelectByName.setParameter("name", "Alex");
-            System.out.println(querySelectByName.getResultList());
-
-            session.createQuery("update Candidate set salary =: salary where id =: id")
-                    .setParameter("salary", 2000)
-                    .setParameter("id", 1)
-                    .executeUpdate();
-
-            session.createQuery("delete from Candidate where id =: id")
-                    .setParameter("id", 2)
-                    .executeUpdate();
+            rsl = session.createQuery(
+                    "select distinct c from Candidate c "
+                            + "join fetch c.base b "
+                            + "join fetch b.vacancies v "
+                            + "where c.id = :id", Candidate.class
+            ).setParameter("id", 1).uniqueResult();
 
             session.getTransaction().commit();
             session.close();

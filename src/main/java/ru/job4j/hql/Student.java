@@ -15,6 +15,9 @@ public class Student {
 
     private String city;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Account account;
+
     public static Student of(String name, int age, String city) {
         Student student = new Student();
         student.name = name;

@@ -29,5 +29,9 @@
         <mapping class="ru.job4j.lazy.Mark"/>
         <mapping class="ru.job4j.hql.Student"/>
         <mapping class="ru.job4j.hql.Candidate"/>
+        <mapping class="ru.job4j.hql.Book"/>
+        <mapping class="ru.job4j.hql.Account"/>
+        <mapping class="ru.job4j.hql.Base"/>
+        <mapping class="ru.job4j.hql.Vacancy"/>
     </session-factory>
 </hibernate-configuration>
