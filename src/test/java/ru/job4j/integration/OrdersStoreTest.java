@@ -1,6 +1,7 @@
 package ru.job4j.integration;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +36,11 @@ public class OrdersStoreTest {
             e.printStackTrace();
         }
         pool.getConnection().prepareStatement(builder.toString()).executeUpdate();
+    }
+
+    @After
+    public void shutdown() throws SQLException {
+        pool.getConnection().prepareStatement("DROP TABLE orders").executeUpdate();
     }
 
     @Test
